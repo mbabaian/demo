@@ -1,0 +1,90 @@
+
+# welcome: # this is the #welcome bloc referenced in index.js
+#   - typing: true
+#     text: # Picks one randomly
+#       - Hey there!
+#       - Hi there!
+#       - Good day :)
+#       - Hello there!
+#   - text: I'm Milo.
+#     typing: 2s
+#   - text: My job is to show you how to use the card catalog. Are you ready to get started?
+#     typing: true
+#   # - wait: 5s
+#   # - text: You can say goodbye now
+#   #   typing: 1s
+#     quick_replies:
+#       - <QR_NO> No
+#       - <QR_YES> Yes
+
+welcome: 
+  - typing: true
+    text: 
+      - Hi there!
+      - Hello there!
+      - Hey there!
+  - text: I'm Milo. My job is to help you understand the card catalog. Are you ready to get started?
+    typing: 3s
+    quick_replies:
+      - payload: 'quit' # if user chooses this option, exit convo
+        title: Nevermind
+      - payload: 'continue'
+        title: Let's go!
+
+goodbye:
+  # - text: You are leaving because of reason {{reason}}
+  - typing: true
+    text: # inserting my own randomized goodbyes
+      - Goodbye!
+      - See ya!
+      - Adios.
+      - See you later. 
+      - Hope to see you back again soon! # if no other properties, you can just send a strings
+    
+
+      # TO DO: Add images from card catalog
+continueReply:
+  - typing: true 
+    text: The card catalog keeps track of all the books in the library.
+  - text: It also lets you know which books are checked out and which are checked in.
+    typing: 2s
+  - text: This is a picture of the card catalog. You type in what you want to search for in the search box.
+    typing: 2s
+  - text: You can search for books by title, author, subject, and series. 
+    typing: 2s
+  - text: How would you like to learn how to search?
+    typing: 2s
+    quick_replies:
+      - payload: 'author'
+        title:  By Author
+      - payload: 'title'
+        title: By Title
+      - payload: 'subject'
+        title: By Subject
+      - payload: 'series'
+        title: By Series
+
+searchByAuthor:
+  - typing: true
+    text: OK. I'll show you how to search by an author's name.
+
+searchByTitle:
+  - typing: true
+    text: OK. I'll show you how to search by a book's title.
+
+searchBySubject:
+  - typing: true
+    text: Let me show you how to search by a subject, like football or kittens.
+
+searchBySeries:
+  - typing: true
+    text: Great! I'll show you how to search for a book series. 
+
+
+fallback:
+  - typing: true
+    text: 
+      - Sorry. I don't understand.
+      - Try saying that a different way.
+      - I don't understand.
+      - Can you try to say it another way?

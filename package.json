@@ -1,0 +1,20 @@
+{
+  "name": "milo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "botpress": "1.x",
+    "botpress-api.ai": "^2.1.7",
+    "botpress-web": "^2.0.3",
+    "react": "^16.2.0"
+  },
+  "scripts": {
+    "start": "botpress start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mbabaian",
+  "license": "Botpress Proprietary License"
+}
+

@@ -1,0 +1,17 @@
+# DEFAULT SETTINGS
+botName: 'Milo' ## Name of your bot
+botAvatarUrl: null ## Default avatar url of the image (e.g. 'https://avatars3.githubusercontent.com/u/1315508?v=4&s=400' )
+botConvoTitle: 'Card Catalog Expert' ## Title of the first conversation with the bot
+
+# POPUP CONVERSATION SETTINGS
+welcomeMsgEnable: true
+welcomeMsgDelay: 1000
+welcomeMsgText: | ## Welcome message that shows at on pop-up (multi-lines)
+  I see you're trying to use the card catalog. 
+  Type 'help' and hit enter if you would like some assistance.
+
+# COLOR SETTINGS
+backgroundColor: '#ffffff' ## Color of the background 
+textColorOnBackground: '#666666' ## Color of the text on the background
+foregroundColor: '#0176ff' ## Element background color (header, composer, button..)
+textColorOnForeground: '#ffffff'  ## Element text color (header, composer, button..)

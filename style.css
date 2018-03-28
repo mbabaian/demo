@@ -1,0 +1,38 @@
+html {
+    color: blue;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+#catalogSearch {
+    text-align: center;
+}
+
+#searchBox {
+    width: 300px;
+    height: 24px;
+    padding-left: 5px;
+}
+
+button {
+    height: 30px;
+}
+
+#app {
+    margin-right: 50px;
+    height: 80%;
+    box-shadow: 5px 5px 10px gray;
+    width: 348px;
+    height: 430px;
+}
+
+iframe {
+    text-align: right;
+}
