@@ -26,7 +26,9 @@ goodbye:
       # TO DO: Add images from card catalog
 continueReply:
   - typing: true 
-    text: The card catalog keeps track of all the books in the library. It also lets you know which books are checked out and which are checked in.
+    text: |
+      The card catalog keeps track of all the books in the library. 
+      It also lets you know which books are checked out and which are checked in.
   - text: You type in what you want to search for in the search box. You can search for books by title, author, subject, and series. 
     typing: 1s
   - text: Would you like to give it a try?
@@ -77,9 +79,9 @@ chosenAuthor:
   - wait: 10s
   - text: You should now have a list of results for your author search. Do you see it?
     quick_replies:
-      - payload: 'i see it'
+      - payload: 'continue search'
         title: I see it 
-      - payload: 'i do not see it'
+      - payload: 'get help'
         title: I don't see it
       - payload: 'quit'
         title: Exit demo
@@ -105,9 +107,9 @@ chosenTitle:
   - wait: 10s
     text: You should now have a list of results for your title search. Do you see it?
     quick_replies:
-      - payload: 'i see it'
+      - payload: 'continue search'
         title: I see it 
-      - payload: 'i do not see it'
+      - payload: 'get help'
         title: I don't see it
       - payload: 'quit'
         title: Exit demo
@@ -131,9 +133,9 @@ chosenSubject:
   - wait: 10s
     text: You should now have a list of results for your subject search. Do you see it?
     quick_replies:
-      - payload: 'i see it'
+      - payload: 'continue search'
         title: I see it 
-      - payload: 'i do not see it'
+      - payload: 'get help'
         title: I don't see it
       - payload: 'quit'
         title: Exit demo
@@ -142,46 +144,58 @@ searchBySeries:
   - typing: true
     text: Great! I'll show you how to search for a book series. Pick one of the following series for our search.
     quick_replies: 
-    - payload: 'diary wimpy kid'
+    - payload: 'diary'
       title: Diary of a Wimpy Kid
-    - payload: 'junie b jones'
+    - payload: 'junie'
       title: Junie B Jones
-    - payload: 'henry mudge'
+    - payload: 'henry'
       title: Henry and Mudge
-    - payload: 'harry potter'
+    - payload: 'harry'
       title: Harry Potter
 
 chosenSeries:
   - typing: true
-    text: Wonderful! You're doing great. Now type the name of the series into the search box at the top of the card catalog. Type 'ready' when you are ready to continue.
-
-readyResponse: 
-  - typing: true
-    text: You should now have a list of results for your series search. Do you see it?
+    text: |
+      Wonderful! You're doing great. Now type the name of the series into the search box at the top of the card catalog. 
+      I'll be back in a bit to check in on you. Good luck!
+  - wait: 10s
+  - text: You should now have a list of results for your series search. Do you see it?
     quick_replies:
-      - payload: 'i see it'
-        title: I see it 
-      - payload: 'i do not see it'
-        title: I don't see it
       - payload: 'quit'
         title: Exit demo
+      - payload: 'continue search'
+        title: I see it 
+      - payload: 'get help'
+        title: I don't see it
 
 explainResults:
   - typing: true
-    text: There are several parts to your results that you need to know. First, if you want to find a book that is available today, only look at the books that are marked "IN". You don't want to waste your time looking for books that are marked "LOST" or "OUT".
-  - text: Take a close look at the status of each book. Find one that is IN and click on it. I'll be back in a few seconds to tell you more . . . 
-  - wait: 10s
+    text: |
+      There are several parts to your results that you need to know. 
+      First, if you want to find a book that is available today, only look at the books that are marked "IN". 
+      You don't want to waste your time looking for books that are marked "LOST" or "OUT". 
+  - text: |
+      Take a close look at the status of each book. Find one that is IN and click on it. 
+      I'll be back in a few seconds to tell you more . . . 
+  - wait: 2s
   - text: After clicking on a book, you'll see a new page that has more information about the book. Look for the book's call number. 
-    typing: 2s
-  - text: The call number is like an address for a book--it tells you where the book "lives" on the shelves. You use the call number to find the book on the shelf.
     typing: 1s
-  - text: The first line of the call number is either a letter or a number. If it starts with a number, like 741.5, that is a nonfiction book. If it starts with a letter, like E or FIC, that's fiction.
+  - text: |
+      The call number is like an address for a book--it tells you where the book "lives" on the shelves. 
+      You use the call number to find the book on the shelf.
     typing: 1s
-  - text: It's always a good idea to write down the call number on a small sheet of paper. That way you don't forget what the call number during your hunt for books.
+  - text: | 
+      The first line of the call number is either a letter or a number. 
+      If it starts with a number, like 741.5, that is a nonfiction book. 
+      If it starts with a letter, like E or FIC, that's fiction.
+    typing: 1s
+  - text: |
+      It's always a good idea to write down the call number on a small sheet of paper. 
+      That way you don't forget what the call number during your hunt for books.
     typing: 1s
   - text: What does your book start with?
     quick_replies:
-      - payload: 'e'
+      - payload: 'easy'
         title: 'E'
       - payload: 'fic'
         title: 'F or FIC'
@@ -192,38 +206,74 @@ explainResults:
 
 easy:
   - typing: true
-    text: If the call number starts with E, you have found a picture book! Some people claim the E stands for Easy, but I like to think it stands for Everyone.
+    text: | 
+      If the call number starts with E, you have found a picture book! 
+      Some people claim the E stands for Easy, but I like to think it stands for Everyone.
   - text: Because EVERYONE loves a good picture book! Get it? :)
     typing: 1s
   - text: To find this book, you need to go to the library's E section. Get some help from your librarian if you need to.
     typing: 1s
-  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the E section, look for the first letter of the author's last name. 
+  - text: |
+      The second line of the call number comes from the author's last name. 
+      Think of it as the "street" where the book lives. When you get to the E section, 
+      look for the first letter of the author's last name. 
     typing: 1s
-  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+  - text: |
+      When you get to the right street, look very closely at the spine of each book. 
+      Eventually you will find the one you're looking for!
     typing: 1s
 
 fiction:
   - typing: true
     text: If the call number starts with F or FIC, you have found a fiction book! 
   - text: To find this book, you need to go to the library's fiction section. Get some help from your librarian if you need to.
-  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the fiction section, look for the first letter of the author's last name. 
-  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+    typing: 1s
+  - text: | 
+      The second line of the call number comes from the author's last name. 
+      Think of it as the "street" where the book lives. When you get to the fiction section, 
+      look for the first letter of the author's last name. 
+    typing: 1s
+  - text: |
+      When you get to the right street, look very closely at the spine of each book. 
+      Eventually you will find the one you're looking for!
+    typing: 1s
 
 nonfiction:
   - typing: true
     text: If the call number starts with a number between 000 and 999, you have found a nonfiction book! 
-  - text: Because EVERYONE loves a good picture book! Get it. :)
-  - text: To find this book, you need to go to the library's nonfiction section. Get some help from your librarian if you need to.
-  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the nonfiction section, look for the number on the first line of your call number. 
-  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+  - text: Because EVERYONE loves a good picture book! Get it? :)
+    typing: 1s
+  - text: |
+      To find this book, you need to go to the library's nonfiction section. 
+      Get some help from your librarian if you need to.
+    typing: 1s
+  - text: |
+      The second line of the call number comes from the author's last name. 
+      Think of it as the "street" where the book lives. When you get to the nonfiction section, 
+      look for the number on the first line of your call number. 
+    typing: 1s
+  - text: |
+      When you get to the right street, look very closely at the spine of each book. 
+      Eventually you will find the one you're looking for!
+    typing: 1s
 
 biography: 
   - typing: true
     text: Some biographies have B on the first line of their call number. Others have 921. 
-  - text: To find this book, you need to go to the library's biography section. Get some help from your librarian if you need to.
-  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the nonfiction section, look for the first letter of the author's last name. 
-  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
-    
+  - text: |
+      To find this book, you need to go to the library's biography section. 
+      Get some help from your librarian if you need to.
+    typing: 1s
+  - text: | 
+      The second line of the call number comes from the author's last name. 
+      Think of it as the "street" where the book lives. When you get to the nonfiction section, 
+      look for the first letter of the author's last name. 
+    typing: 1s
+  - text: |
+      When you get to the right street, look very closely at the spine of each book. 
+      Eventually you will find the one you're looking for!
+    typing: 1s
+        
 getHelp: 
   - typing: true
     text: Uh oh! Check your spelling and try again. If it still doesn't work, get some help from the librarian.

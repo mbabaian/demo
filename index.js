@@ -3,8 +3,8 @@
 module.exports = function(bp) {
   // Listens for a first message (this is a Regex)
   // GET_STARTED is the first message you get on Facebook Messenger
-  bp.hear(/GET_STARTED|hello|hi|hey|holla/i, (event, next) => {
-    event.reply('#welcome') // See the file `content.yml` to see the block
+  bp.hear(/hello|hi|hey|holla|milo/i, (event, next) => {
+    event.reply('#content.welcome') // See the file `content.yml` to see the block
   })
 
   // You can also pass a matcher object to better filter events
@@ -53,7 +53,7 @@ module.exports = function(bp) {
       text: 'Nevermind',
       payload: 'quit'
     }, (event, next) => {
-      event.reply('#content.goodbye')
+      event.reply('#goodbye')
   })
 
   bp.hear({
@@ -62,7 +62,7 @@ module.exports = function(bp) {
     text: 'No thank you.',
     payload: 'quit'
   }, (event, next) => {
-    event.reply('#content.goodbye')
+    event.reply('#goodbye')
   })
 
   // search by author
@@ -98,8 +98,7 @@ module.exports = function(bp) {
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: /lorax|where the wild things are|charlottes web|a wrinkle in time|number the stars/i,
-    payload: 'title'
+    text: /lorax|where the wild things are|charlottes web|a wrinkle in time|number the stars/i
   }, (event, next) => {
     event.reply('#chosenTitle')
   })
@@ -119,8 +118,7 @@ module.exports = function(bp) {
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: /football|origami|poetry|biography/i,
-    payload: 'subject'
+    text: /football|origami|poetry|biography/i
   }, (event, next) => {
     event.reply('#chosenSubject')
   })
@@ -137,15 +135,20 @@ module.exports = function(bp) {
     event.reply('#searchBySeries')
   })
 
-
-
-
-  // once search has started
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'I see it',
-    payload: 'i see it'
+    text: /diary|junie|henry|harry/i
+  }, (event, next) => {
+    event.reply('#chosenSeries')
+  })
+
+  
+  // once card catalog search has started
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: /i see it/i
   }, (event, next) => {
     event.reply('#explainResults')
   })
@@ -153,12 +156,56 @@ module.exports = function(bp) {
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'I don\'t see it.',
-    payload: 'i do not see it'
+    text: /i don't see it/i
   }, (event, next) => {
     event.reply('#getHelp')
   })
 
+
+  /* HANDLE CALL NUMBERS */
+
+  // picture books
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'E',
+    payload: 'easy'
+  }, (event, next) => {
+    event.reply('#easy')
+  })
+
+
+  // fiction
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'F or FIC',
+    payload: 'fic'
+  }, (event, next) => {
+    event.reply('#fiction')
+  })
+
+  // nonfiction
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: '000 - 999',
+    payload: 'nonfiction'
+  }, (event, next) => {
+    event.reply('#nonfiction')
+  })
+
+  // biography 
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'B or 921',
+    payload: 'biography'
+  }, (event, next) => {
+    event.reply('#biography')
+  })
+
+  // exiting program
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
@@ -173,19 +220,19 @@ module.exports = function(bp) {
   })
   
   bp.hear(/test/i, (event, next) => {
-    event.reply('#test')
+    event.reply('#content.test')
   })
 
   // handle unrecognized words
   bp.hear({text: /.*/i}, (event, next) => {
-    event.reply('#fallback')
+    event.reply('#content.fallback')
     // event.next();
   })
 
   // debugging
-  bp.hear({text: /.+/i}, (event, next) => {
-    bp.logger.info(event) 
-  })
+  // bp.hear({text: /.+/i}, (event, next) => {
+  //   bp.logger.info(event) 
+  // })
 
   
 }
