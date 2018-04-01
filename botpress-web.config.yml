@@ -7,11 +7,11 @@ botConvoTitle: 'Card Catalog Expert' ## Title of the first conversation with the
 welcomeMsgEnable: true
 welcomeMsgDelay: 1000
 welcomeMsgText: | ## Welcome message that shows at on pop-up (multi-lines)
-  I see you're trying to use the card catalog. 
-  Type 'help' and hit enter if you would like some assistance.
+  Not sure what to do? Type 'help' to get started. 
 
 # COLOR SETTINGS
 backgroundColor: '#ffffff' ## Color of the background 
 textColorOnBackground: '#666666' ## Color of the text on the background
-foregroundColor: '#0176ff' ## Element background color (header, composer, button..)
+# foregroundColor: '#0176ff' ## Element background color (header, composer, button..)
+foregroundColor: '#21618C'
 textColorOnForeground: '#ffffff'  ## Element text color (header, composer, button..)

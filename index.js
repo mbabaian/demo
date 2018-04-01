@@ -1,29 +1,9 @@
-/*
-  CONGRATULATIONS on creating your first Botpress bot!
-
-  This is the programmatic entry point of your bot.
-  Your bot's logic resides here.
-  
-  Here's the next steps for you:
-  1. Read this file to understand how this simple bot works
-  2. Read the `content.yml` file to understand how messages are sent
-  3. Install a connector module (Facebook Messenger and/or Slack)
-  4. Customize your bot!
-
-  Happy bot building!
-
-  The Botpress Team
-  ----
-  Getting Started (Youtube Video): https://www.youtube.com/watch?v=HTpUmDz9kRY
-  Documentation: https://botpress.io/docs
-  Our Slack Community: https://slack.botpress.io
-*/
-
+// conversation logic
 
 module.exports = function(bp) {
   // Listens for a first message (this is a Regex)
   // GET_STARTED is the first message you get on Facebook Messenger
-  bp.hear(/GET_STARTED|hello|hi|test|hey|holla/i, (event, next) => {
+  bp.hear(/GET_STARTED|hello|hi|hey|holla/i, (event, next) => {
     event.reply('#welcome') // See the file `content.yml` to see the block
   })
 
@@ -39,8 +19,7 @@ module.exports = function(bp) {
   })
 
   bp.hear('help', (event, next) => {
-    event.reply('#welcome')
-    // event.next();
+    event.reply('#content.welcome')
   })
   
   bp.hear('search', (event, next) => {
@@ -57,6 +36,16 @@ module.exports = function(bp) {
     event.reply('#continueReply')
     })
 
+  // verify user wants to learn more
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'Yes! Absolutely.',
+    payload: 'yes'
+  }, (event, next) => {
+    event.reply('#pickASearchMethod')
+  })
+
   // exit convo if user doesn't want to learn about card catalog
     bp.hear({
       platform: 'web',
@@ -64,49 +53,128 @@ module.exports = function(bp) {
       text: 'Nevermind',
       payload: 'quit'
     }, (event, next) => {
-      event.reply('#goodbye')
+      event.reply('#content.goodbye')
+  })
+
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'No thank you.',
+    payload: 'quit'
+  }, (event, next) => {
+    event.reply('#content.goodbye')
   })
 
   // search by author
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'By Author',
+    text: 'Search by Author',
     payload: 'author'
   }, (event, next) => {
     event.reply('#searchByAuthor')
-})
+  })
+
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: /dr. seuss|jk rowling|rick riordan|lemony snicket/i
+  }, (event, next) => {
+      event.reply('#chosenAuthor')
+    // event.reply('#chosenAuthor', { author: response.text })
+    // event.next()
+  })
 
   // search by title
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'By Title',
+    text: 'Search by Title',
     payload: 'title'
   }, (event, next) => {
     event.reply('#searchByTitle')
   })
 
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: /lorax|where the wild things are|charlottes web|a wrinkle in time|number the stars/i,
+    payload: 'title'
+  }, (event, next) => {
+    event.reply('#chosenTitle')
+  })
+
+
+
   // search by subject
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'By Subject',
+    text: 'Search by Subject',
     payload: 'subject'
   }, (event, next) => {
     event.reply('#searchBySubject')
   })
 
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: /football|origami|poetry|biography/i,
+    payload: 'subject'
+  }, (event, next) => {
+    event.reply('#chosenSubject')
+  })
+
+
+
   // search by series
   bp.hear({
     platform: 'web',
     type: 'quick_reply',
-    text: 'By Series',
+    text: 'Search by Series',
     payload: 'series'
   }, (event, next) => {
     event.reply('#searchBySeries')
   })
 
+
+
+
+  // once search has started
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'I see it',
+    payload: 'i see it'
+  }, (event, next) => {
+    event.reply('#explainResults')
+  })
+
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'I don\'t see it.',
+    payload: 'i do not see it'
+  }, (event, next) => {
+    event.reply('#getHelp')
+  })
+
+  bp.hear({
+    platform: 'web',
+    type: 'quick_reply',
+    text: 'Exit demo',
+    payload: 'quit'
+  }, (event, next) => {
+    event.reply('#goodbye')
+  })
+
+  bp.hear('ready', (event, next) => {
+    event.reply('#readyResponse')
+  })
+  
+  bp.hear(/test/i, (event, next) => {
+    event.reply('#test')
+  })
 
   // handle unrecognized words
   bp.hear({text: /.*/i}, (event, next) => {
@@ -114,11 +182,10 @@ module.exports = function(bp) {
     // event.next();
   })
 
-
   // debugging
-  // bp.hear({text: /.+/i}, (event, next) => {
-  //   bp.logger.info(event) 
-  // })
+  bp.hear({text: /.+/i}, (event, next) => {
+    bp.logger.info(event) 
+  })
 
   
 }

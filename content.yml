@@ -1,22 +1,3 @@
-
-# welcome: # this is the #welcome bloc referenced in index.js
-#   - typing: true
-#     text: # Picks one randomly
-#       - Hey there!
-#       - Hi there!
-#       - Good day :)
-#       - Hello there!
-#   - text: I'm Milo.
-#     typing: 2s
-#   - text: My job is to show you how to use the card catalog. Are you ready to get started?
-#     typing: true
-#   # - wait: 5s
-#   # - text: You can say goodbye now
-#   #   typing: 1s
-#     quick_replies:
-#       - <QR_NO> No
-#       - <QR_YES> Yes
-
 welcome: 
   - typing: true
     text: 
@@ -34,52 +15,218 @@ welcome:
 goodbye:
   # - text: You are leaving because of reason {{reason}}
   - typing: true
-    text: # inserting my own randomized goodbyes
-      - Goodbye!
-      - See ya!
-      - Adios.
-      - See you later. 
-      - Hope to see you back again soon! # if no other properties, you can just send a strings
-    
-
+    text: OK. If you change your mind, just type my name. I'll be here when you're ready. Until then . . .
+  - text: # inserting my own randomized goodbyes
+    - Goodbye!
+    - See ya!
+    - Adios.
+    - See you later. 
+    - Hope to see you back again soon! # if no other properties, you can just send a strings
+  
       # TO DO: Add images from card catalog
 continueReply:
   - typing: true 
-    text: The card catalog keeps track of all the books in the library.
-  - text: It also lets you know which books are checked out and which are checked in.
-    typing: 2s
-  - text: This is a picture of the card catalog. You type in what you want to search for in the search box.
-    typing: 2s
-  - text: You can search for books by title, author, subject, and series. 
-    typing: 2s
-  - text: How would you like to learn how to search?
+    text: The card catalog keeps track of all the books in the library. It also lets you know which books are checked out and which are checked in.
+  - text: You type in what you want to search for in the search box. You can search for books by title, author, subject, and series. 
+    typing: 1s
+  - text: Would you like to give it a try?
+    typing: 1s
+    quick_replies:
+      - payload: 'quit'
+        title: No thank you.
+      - payload: 'yes'
+        title:  Yes! Absolutely.
+
+pickASearchMethod:
+  - text: Pick a search method to get started. 
     typing: 2s
     quick_replies:
       - payload: 'author'
-        title:  By Author
+        title: Search by Author
       - payload: 'title'
-        title: By Title
+        title:  Search by Title
+      # - payload: 'genre'  NOT AT THIS TIME -- DO FOR A LATER VERSION
+      #   title: Search by Genre
       - payload: 'subject'
-        title: By Subject
+        title: Search by Subject
       - payload: 'series'
-        title: By Series
+        title: Search by Series
+      - payload: 'quit'
+        title: Nevermind
 
 searchByAuthor:
   - typing: true
-    text: OK. I'll show you how to search by an author's name.
+    text: Now pick one of the following authors for your search.
+    quick_replies:
+      - payload: 'dr. seuss'
+        title: Dr. Seuss
+      - payload: 'jk rowling'
+        title: JK Rowling
+      - payload: 'rick riordan'
+        title: Rick Riordan
+      - payload: 'lemony snicket'
+        title: Lemony Snicket  
 
+chosenAuthor:
+  - typing: true
+    # text: You chose {{ author }} THIS ISN'T WORKING. GET SUPPORT FROM BOTPRESS 
+    text: 
+      - Great! Now type that author's name into the search box at the top of the card catalog.
+      - Excellent. Now type that author's name into the search box at the top of the card catalog.
+      - Wonderful. Now type that author's name into the search box at the top of the card catalog.
+  - wait: 10s
+  - text: You should now have a list of results for your author search. Do you see it?
+    quick_replies:
+      - payload: 'i see it'
+        title: I see it 
+      - payload: 'i do not see it'
+        title: I don't see it
+      - payload: 'quit'
+        title: Exit demo
+  
 searchByTitle:
   - typing: true
-    text: OK. I'll show you how to search by a book's title.
+    text: Choose a book to use for our search.
+    quick_replies:
+      - payload: 'lorax'
+        title: The Lorax
+      - payload: 'where the wild things are'
+        title:  Where the Wild Things Are
+      - payload: 'charlottes web'
+        title: Charlotte's Web
+      - payload: 'a wrinkle in time'
+        title: A Wrinkle in Time
+      - payload: 'number the stars'
+        title: Number the Stars
+
+chosenTitle: 
+  - typing: true
+    text: Nice work! Now type that title name into the search box at the top of the card catalog.
+  - wait: 10s
+    text: You should now have a list of results for your title search. Do you see it?
+    quick_replies:
+      - payload: 'i see it'
+        title: I see it 
+      - payload: 'i do not see it'
+        title: I don't see it
+      - payload: 'quit'
+        title: Exit demo
 
 searchBySubject:
   - typing: true
-    text: Let me show you how to search by a subject, like football or kittens.
+    text: We will explore nonfiction books as we search by subjects. Choose one of the following topics, and let's get started.
+    quick_replies:
+      - payload: 'football'
+        title: Football
+      - payload: 'origami'
+        title: Origami
+      - payload: 'poetry'
+        title: Poetry
+      - payload: 'biography'
+        title: Biography
+
+chosenSubject:
+  - typing: true
+    text: Excellent. Now type the subject into the search box at the top of the card catalog.
+  - wait: 10s
+    text: You should now have a list of results for your subject search. Do you see it?
+    quick_replies:
+      - payload: 'i see it'
+        title: I see it 
+      - payload: 'i do not see it'
+        title: I don't see it
+      - payload: 'quit'
+        title: Exit demo
 
 searchBySeries:
   - typing: true
-    text: Great! I'll show you how to search for a book series. 
+    text: Great! I'll show you how to search for a book series. Pick one of the following series for our search.
+    quick_replies: 
+    - payload: 'diary wimpy kid'
+      title: Diary of a Wimpy Kid
+    - payload: 'junie b jones'
+      title: Junie B Jones
+    - payload: 'henry mudge'
+      title: Henry and Mudge
+    - payload: 'harry potter'
+      title: Harry Potter
 
+chosenSeries:
+  - typing: true
+    text: Wonderful! You're doing great. Now type the name of the series into the search box at the top of the card catalog. Type 'ready' when you are ready to continue.
+
+readyResponse: 
+  - typing: true
+    text: You should now have a list of results for your series search. Do you see it?
+    quick_replies:
+      - payload: 'i see it'
+        title: I see it 
+      - payload: 'i do not see it'
+        title: I don't see it
+      - payload: 'quit'
+        title: Exit demo
+
+explainResults:
+  - typing: true
+    text: There are several parts to your results that you need to know. First, if you want to find a book that is available today, only look at the books that are marked "IN". You don't want to waste your time looking for books that are marked "LOST" or "OUT".
+  - text: Take a close look at the status of each book. Find one that is IN and click on it. I'll be back in a few seconds to tell you more . . . 
+  - wait: 10s
+  - text: After clicking on a book, you'll see a new page that has more information about the book. Look for the book's call number. 
+    typing: 2s
+  - text: The call number is like an address for a book--it tells you where the book "lives" on the shelves. You use the call number to find the book on the shelf.
+    typing: 1s
+  - text: The first line of the call number is either a letter or a number. If it starts with a number, like 741.5, that is a nonfiction book. If it starts with a letter, like E or FIC, that's fiction.
+    typing: 1s
+  - text: It's always a good idea to write down the call number on a small sheet of paper. That way you don't forget what the call number during your hunt for books.
+    typing: 1s
+  - text: What does your book start with?
+    quick_replies:
+      - payload: 'e'
+        title: 'E'
+      - payload: 'fic'
+        title: 'F or FIC'
+      - payload: 'number'
+        title: 000 - 999
+      - payload: 'biography'
+        title: B or 921 
+
+easy:
+  - typing: true
+    text: If the call number starts with E, you have found a picture book! Some people claim the E stands for Easy, but I like to think it stands for Everyone.
+  - text: Because EVERYONE loves a good picture book! Get it? :)
+    typing: 1s
+  - text: To find this book, you need to go to the library's E section. Get some help from your librarian if you need to.
+    typing: 1s
+  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the E section, look for the first letter of the author's last name. 
+    typing: 1s
+  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+    typing: 1s
+
+fiction:
+  - typing: true
+    text: If the call number starts with F or FIC, you have found a fiction book! 
+  - text: To find this book, you need to go to the library's fiction section. Get some help from your librarian if you need to.
+  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the fiction section, look for the first letter of the author's last name. 
+  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+
+nonfiction:
+  - typing: true
+    text: If the call number starts with a number between 000 and 999, you have found a nonfiction book! 
+  - text: Because EVERYONE loves a good picture book! Get it. :)
+  - text: To find this book, you need to go to the library's nonfiction section. Get some help from your librarian if you need to.
+  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the nonfiction section, look for the number on the first line of your call number. 
+  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+
+biography: 
+  - typing: true
+    text: Some biographies have B on the first line of their call number. Others have 921. 
+  - text: To find this book, you need to go to the library's biography section. Get some help from your librarian if you need to.
+  - text: The second line of the call number comes from the author's last name. Think of it as the "street" where the book lives. When you get to the nonfiction section, look for the first letter of the author's last name. 
+  - text: When you get to the right street, look very closely at the spine of each book. Eventually you will find the one you're looking for!
+    
+getHelp: 
+  - typing: true
+    text: Uh oh! Check your spelling and try again. If it still doesn't work, get some help from the librarian.
 
 fallback:
   - typing: true
@@ -88,3 +235,9 @@ fallback:
       - Try saying that a different way.
       - I don't understand.
       - Can you try to say it another way?
+
+test:
+  - text: This is a test.
+    web-style:
+      padding: 10px
+      color: red
