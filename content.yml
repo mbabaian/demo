@@ -199,7 +199,7 @@ explainResults:
         title: 'E'
       - payload: 'fic'
         title: 'F or FIC'
-      - payload: 'number'
+      - payload: 'nonfiction'
         title: 000 - 999
       - payload: 'biography'
         title: B or 921 
